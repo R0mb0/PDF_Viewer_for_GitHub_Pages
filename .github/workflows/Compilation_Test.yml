@@ -1,0 +1,21 @@
+name: Compilation_Test
+on:
+  push:
+    branches:
+      - 'main'
+jobs:
+  build_latex:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download repo files
+        uses: actions/checkout@v6.0.1
+      - name: Compile files
+        uses: xu-cheng/latex-action@v4
+        with:
+          working_directory: Document
+          root_file: Document.tex
+      - name: Upload compiled file
+        uses: actions/upload-artifact@v6
+        with: 
+          name: Document
+          path: Document/Document.pdf
